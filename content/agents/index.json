@@ -1,0 +1,464 @@
+[
+  {
+    "id": "ai-transformation-consultant",
+    "categoryId": "business",
+    "name": "AI Transformation Consultant",
+    "role": "AI opportunity assessment, data readiness, governance, pilot-to-scale, capability building"
+  },
+  {
+    "id": "business-strategist",
+    "categoryId": "business",
+    "name": "Business Strategist",
+    "role": "where to play / how to win, business model, growth option, การตัดสินใจเชิงกลยุทธ์"
+  },
+  {
+    "id": "business-transformation-consultant",
+    "categoryId": "business",
+    "name": "Business Transformation Consultant",
+    "role": "transformation ระดับองค์กร: case for change, business/operating model, program design, leadership & change"
+  },
+  {
+    "id": "digital-transformation-consultant",
+    "categoryId": "business",
+    "name": "Digital Transformation Consultant",
+    "role": "digital maturity, customer journey, process digitalization, technology & data foundation, roadmap"
+  },
+  {
+    "id": "financial-analyst",
+    "categoryId": "business",
+    "name": "Financial Analyst",
+    "role": "P&L, cash flow, unit economics, budgeting, investment appraisal, financial modeling"
+  },
+  {
+    "id": "hr-organization",
+    "categoryId": "business",
+    "name": "HR & Organization",
+    "role": "org design, workforce planning, performance & reward, capability, change"
+  },
+  {
+    "id": "marketing-consultant",
+    "categoryId": "business",
+    "name": "Marketing Consultant",
+    "role": "positioning, funnel B2B/B2C, channel, CAC/LTV, marketing operations"
+  },
+  {
+    "id": "operations-excellence",
+    "categoryId": "business",
+    "name": "Operations Excellence",
+    "role": "process improvement ข้าม function, KPI tree, management cadence, continuous improvement"
+  },
+  {
+    "id": "product-manager",
+    "categoryId": "business",
+    "name": "Product Manager",
+    "role": "product strategy, discovery, prioritization, roadmap, outcome metric"
+  },
+  {
+    "id": "sales-strategist",
+    "categoryId": "business",
+    "name": "Sales Strategist",
+    "role": "ICP, sales process, pipeline metric, quota/comp, sales enablement"
+  },
+  {
+    "id": "sme-consultant",
+    "categoryId": "business",
+    "name": "SME Consultant",
+    "role": "ที่ปรึกษาธุรกิจ SME: cash flow, margin, growth ที่ไม่กินเงินสด, systemization, คนแรกๆ, เจ้าของทำงานบนธุรกิจ"
+  },
+  {
+    "id": "erp-consultant",
+    "categoryId": "consultant",
+    "name": "ERP Consultant",
+    "role": "ERP ไม่ผูกยี่ห้อ: system selection, implementation lifecycle, fit/gap, master data, migration, adoption, rescue"
+  },
+  {
+    "id": "erp-epicor-consultant",
+    "categoryId": "consultant",
+    "name": "ERP Epicor Consultant",
+    "role": "ที่ปรึกษา Epicor Kinetic / ERP10 (BAQ, BPM, Configurator, Web Service)"
+  },
+  {
+    "id": "material-resource-planner",
+    "categoryId": "consultant",
+    "name": "Material Resource Planner",
+    "role": "MRP เชิงลึก: BOM, lot sizing, planning parameter, supply planning, exception management"
+  },
+  {
+    "id": "production-planner",
+    "categoryId": "consultant",
+    "name": "Production Planner",
+    "role": "วางแผนการผลิต: MPS, capacity planning, scheduling, shop floor execution"
+  },
+  {
+    "id": "scm-consultant",
+    "categoryId": "consultant",
+    "name": "SCM Consultant",
+    "role": "ที่ปรึกษา Supply Chain Management (MRP, Demand Planning, Inventory, PO/SO workflow)"
+  },
+  {
+    "id": "scm-customer-collaboration",
+    "categoryId": "consultant",
+    "name": "SCM Customer Collaboration",
+    "role": "ทำงานร่วมกับลูกค้า downstream: forecast sharing, CPFR, VMI, OTIF, EDI, joint governance"
+  },
+  {
+    "id": "scm-planning",
+    "categoryId": "consultant",
+    "name": "SCM Planning",
+    "role": "S&OP / IBP: demand planning, supply planning, inventory strategy ระดับ network, one number"
+  },
+  {
+    "id": "brand-identity-designer",
+    "categoryId": "creative",
+    "name": "Brand Identity Designer",
+    "role": "ระบบตัวตนแบรนด์: platform, naming, voice, visual direction brief, guideline"
+  },
+  {
+    "id": "content-writer",
+    "categoryId": "creative",
+    "name": "Content Writer",
+    "role": "long-form: blog, article, newsletter จาก research → outline → draft → edit พร้อม SEO พื้นฐาน"
+  },
+  {
+    "id": "copywriter",
+    "categoryId": "creative",
+    "name": "Copywriter",
+    "role": "copy เพื่อให้คนทำ: headline, landing page, ad, email, CTA, A/B variant"
+  },
+  {
+    "id": "creative-director",
+    "categoryId": "creative",
+    "name": "Creative Director",
+    "role": "คุมทิศทางและคุณภาพงานสร้างสรรค์: brief, concept selection, feedback, consistency ไม่ผลิตเอง"
+  },
+  {
+    "id": "idea-generator",
+    "categoryId": "creative",
+    "name": "Idea Generator",
+    "role": "ระดมไอเดียอย่างเป็นระบบ: reframe, SCAMPER/analogy/constraint, cluster, shortlist ไม่ตัดสินเอง"
+  },
+  {
+    "id": "script-writer",
+    "categoryId": "creative",
+    "name": "Script Writer",
+    "role": "บทสำหรับพูดและเห็น: วิดีโอสั้น/ยาว, podcast, presentation, hook, timing, visual direction"
+  },
+  {
+    "id": "social-media-creator",
+    "categoryId": "creative",
+    "name": "Social Media Creator",
+    "role": "content ต่อ platform: hook, caption, pillar, calendar, repurpose, community, analytics"
+  },
+  {
+    "id": "storyteller",
+    "categoryId": "creative",
+    "name": "Storyteller",
+    "role": "เรื่องเล่าที่มีคนต้องการ สิ่งขวาง และการเปลี่ยนแปลง: brand/customer/founder story"
+  },
+  {
+    "id": "ux-writer",
+    "categoryId": "creative",
+    "name": "UX Writer",
+    "role": "ข้อความใน product: microcopy, error, empty state, onboarding, glossary, accessibility, localization"
+  },
+  {
+    "id": "visual-concept-designer",
+    "categoryId": "creative",
+    "name": "Visual Concept Designer",
+    "role": "concept ภาพ: composition, color, typography direction, image prompt, design critique"
+  },
+  {
+    "id": "fitness-coach",
+    "categoryId": "life-style",
+    "name": "Fitness Coach",
+    "role": "ออกกำลังกาย: assessment, program design, form, progression, recovery, adherence"
+  },
+  {
+    "id": "habit-coach",
+    "categoryId": "life-style",
+    "name": "Habit Coach",
+    "role": "สร้าง/เลิกนิสัย: habit loop, cue/friction design, tracking, relapse plan"
+  },
+  {
+    "id": "home-organizer",
+    "categoryId": "life-style",
+    "name": "Home Organizer",
+    "role": "จัดบ้าน: declutter, zoning, storage, maintenance routine, การอยู่ร่วมกัน"
+  },
+  {
+    "id": "learning-coach",
+    "categoryId": "life-style",
+    "name": "Learning Coach",
+    "role": "เรียนทักษะใหม่: goal design, retrieval/spacing/deliberate practice, resource, plateau"
+  },
+  {
+    "id": "nutrition-advisor",
+    "categoryId": "life-style",
+    "name": "Nutrition Advisor",
+    "role": "โภชนาการทั่วไป: หลักการ, meal planning ในชีวิตจริง, label, eating behavior (ไม่ใช่ clinical)"
+  },
+  {
+    "id": "personal-finance-coach",
+    "categoryId": "life-style",
+    "name": "Personal Finance Coach",
+    "role": "การเงินส่วนบุคคล: budgeting, emergency fund, debt, saving goal, หลักการลงทุน (ไม่แนะนำสินทรัพย์รายตัว)"
+  },
+  {
+    "id": "relationship-communication-coach",
+    "categoryId": "life-style",
+    "name": "Relationship Communication Coach",
+    "role": "สื่อสารในความสัมพันธ์: listening, I-statement, de-escalation, boundary (ไม่ใช่ therapy)"
+  },
+  {
+    "id": "sleep-wellness-advisor",
+    "categoryId": "life-style",
+    "name": "Sleep & Wellness Advisor",
+    "role": "การนอนและความเครียด: circadian, sleep hygiene, ปัญหาทั่วไป, red flag ที่ต้องพบแพทย์"
+  },
+  {
+    "id": "time-management-coach",
+    "categoryId": "life-style",
+    "name": "Time Management Coach",
+    "role": "เวลาและพลังงานระดับบุคคล: priority, energy mapping, planning rhythm, focus, boundary"
+  },
+  {
+    "id": "travel-planner",
+    "categoryId": "life-style",
+    "name": "Travel Planner",
+    "role": "วางแผนเดินทาง: trip design, itinerary/pacing, budget, logistics, safety & document checklist"
+  },
+  {
+    "id": "calendar-planner",
+    "categoryId": "productivity",
+    "name": "Calendar Planner",
+    "role": "จัดตาราง: block ตาม priority, buffer/travel, meeting hygiene, ตรวจชน ไม่จองเอง"
+  },
+  {
+    "id": "decision-helper",
+    "categoryId": "productivity",
+    "name": "Decision Helper",
+    "role": "จัดโครงการตัดสินใจ: ทางเลือก, เกณฑ์+น้ำหนัก, uncertainty, pre-mortem, bias check ไม่ตัดสินแทน"
+  },
+  {
+    "id": "document-summarizer",
+    "categoryId": "productivity",
+    "name": "Document Summarizer",
+    "role": "สรุปเอกสารยาวหลายระดับ: key point พร้อม page ref, แยก fact/ความเห็น, ระบุสิ่งที่ตัดออก"
+  },
+  {
+    "id": "email-drafter",
+    "categoryId": "productivity",
+    "name": "Email Drafter",
+    "role": "ร่างอีเมลในเสียงของผู้ส่ง: single ask, tone ต่อผู้รับ, reply/follow-up/decline ไม่ส่งเอง"
+  },
+  {
+    "id": "meeting-summarizer",
+    "categoryId": "productivity",
+    "name": "Meeting Summarizer",
+    "role": "สรุปประชุมจาก transcript: decision, action item (owner/due), open question, follow-up draft"
+  },
+  {
+    "id": "note-organizer",
+    "categoryId": "productivity",
+    "name": "Note Organizer",
+    "role": "จัดโน้ตดิบเป็นระบบเบาที่สุด: clarify, structure, tag/link, consolidate ไม่ลบต้นฉบับ"
+  },
+  {
+    "id": "presentation-builder",
+    "categoryId": "productivity",
+    "name": "Presentation Builder",
+    "role": "message → storyline → slide outline: title เป็น takeaway, speaker note, timing, visual brief"
+  },
+  {
+    "id": "spreadsheet-helper",
+    "categoryId": "productivity",
+    "name": "Spreadsheet Helper",
+    "role": "โครงตาราง, สูตรพร้อมคำอธิบาย, pivot, data cleaning/validation, debugging (Excel/Sheets)"
+  },
+  {
+    "id": "task-prioritizer",
+    "categoryId": "productivity",
+    "name": "Task Prioritizer",
+    "role": "จัดลำดับงานรายวัน/สัปดาห์: impact/urgency/effort/dependency, Today/Week/Later, กัน overcommit"
+  },
+  {
+    "id": "translation-assistant",
+    "categoryId": "productivity",
+    "name": "Translation Assistant",
+    "role": "แปลไทย↔อังกฤษ: ความหมาย/register/localize, glossary, back-check, translator's note"
+  },
+  {
+    "id": "academic-writer",
+    "categoryId": "research",
+    "name": "Academic Writer",
+    "role": "เขียนงานวิชาการ: IMRaD, argument, hedging, citation style, figure ไม่แต่งข้อมูล"
+  },
+  {
+    "id": "citation-manager",
+    "categoryId": "research",
+    "name": "Citation Manager",
+    "role": "ตรวจและจัดการอ้างอิง: style, การมีอยู่, metadata, quote accuracy, audit report"
+  },
+  {
+    "id": "data-researcher",
+    "categoryId": "research",
+    "name": "Data Researcher",
+    "role": "หาและประเมินสถิติ/dataset: definition, methodology, comparability, limitation, metadata"
+  },
+  {
+    "id": "fact-checker",
+    "categoryId": "research",
+    "name": "Fact Checker",
+    "role": "ตรวจ claim ถึงแหล่งต้นทาง: claim extraction, source tracing, verdict scale, evidence trail"
+  },
+  {
+    "id": "literature-reviewer",
+    "categoryId": "research",
+    "name": "Literature Reviewer",
+    "role": "ทบทวนวรรณกรรมอย่างเป็นระบบ: search, screening, quality grading, synthesis matrix, gap"
+  },
+  {
+    "id": "market-researcher",
+    "categoryId": "research",
+    "name": "Market Researcher",
+    "role": "วิจัยตลาด: นิยาม, TAM/SAM/SOM ทั้ง top-down/bottom-up, trend, competitor, segment"
+  },
+  {
+    "id": "research-planner",
+    "categoryId": "research",
+    "name": "Research Planner",
+    "role": "ตั้งคำถามและออกแบบการวิจัย: question, hypothesis, method, source plan, evidence standard, stopping rule"
+  },
+  {
+    "id": "research-synthesizer",
+    "categoryId": "research",
+    "name": "Research Synthesizer",
+    "role": "รวมหลักฐานหลายแหล่ง: appraisal, triangulation, confidence level, executive summary"
+  },
+  {
+    "id": "technical-researcher",
+    "categoryId": "research",
+    "name": "Technical Researcher",
+    "role": "ประเมินเทคโนโลยีจาก docs/spec/code/benchmark: comparison matrix, risk, spike design"
+  },
+  {
+    "id": "user-researcher",
+    "categoryId": "research",
+    "name": "User Researcher",
+    "role": "วิจัยผู้ใช้: interview, survey, usability test, synthesis, persona/journey, ethics"
+  },
+  {
+    "id": "backend-engineer",
+    "categoryId": "software-engineering",
+    "name": "Backend Engineer",
+    "role": "ลงมือเขียน API/service: contract, business logic, transaction, observability"
+  },
+  {
+    "id": "bug-reviewer",
+    "categoryId": "software-engineering",
+    "name": "Bug Reviewer",
+    "role": "คัดกรอง bug report: reproduce, จัด severity/priority, หา duplicate ไม่แก้โค้ด"
+  },
+  {
+    "id": "code-cleaner",
+    "categoryId": "software-engineering",
+    "name": "Code Cleaner",
+    "role": "ลบ dead code, unused dependency, stale artifact โดยพิสูจน์ก่อนลบ"
+  },
+  {
+    "id": "code-improver",
+    "categoryId": "software-engineering",
+    "name": "Code Improver",
+    "role": "refactor และปรับปรุงโค้ดโดยไม่เปลี่ยน behavior ภายนอก"
+  },
+  {
+    "id": "code-reviewer",
+    "categoryId": "software-engineering",
+    "name": "Code Reviewer",
+    "role": "รีวิวโค้ดแบบ read-only หา bug, security, spec alignment รายงานเฉพาะที่ยืนยันได้"
+  },
+  {
+    "id": "debugging-specialist",
+    "categoryId": "software-engineering",
+    "name": "Debugging Specialist",
+    "role": "หา root cause ของ bug ด้วยวิธีเชิงสืบสวน ส่งมอบ failing test และ fix ที่แนะนำ"
+  },
+  {
+    "id": "devops-engineer",
+    "categoryId": "software-engineering",
+    "name": "DevOps Engineer",
+    "role": "CI/CD pipeline, deployment strategy, environment, monitoring, rollback"
+  },
+  {
+    "id": "docker-specialist",
+    "categoryId": "software-engineering",
+    "name": "Docker Specialist",
+    "role": "Dockerfile, multi-stage build, compose, image size, container security"
+  },
+  {
+    "id": "frontend-engineer",
+    "categoryId": "software-engineering",
+    "name": "Frontend Engineer",
+    "role": "ลงมือเขียน UI: component, state, accessibility, performance, testing"
+  },
+  {
+    "id": "git-platform-specialist",
+    "categoryId": "software-engineering",
+    "name": "Git Platform Specialist",
+    "role": "Git, branching strategy, PR/MR workflow และ CI config บน GitLab / GitHub"
+  },
+  {
+    "id": "nosql-database-engineer",
+    "categoryId": "software-engineering",
+    "name": "NoSQL Database Engineer",
+    "role": "NoSQL: access-pattern-first modeling, partition key, consistency"
+  },
+  {
+    "id": "planner",
+    "categoryId": "software-engineering",
+    "name": "Planner",
+    "role": "แปลง requirement เป็นแผนงานที่มี dependency order และ acceptance criteria ไม่เขียนโค้ด"
+  },
+  {
+    "id": "qa-engineer",
+    "categoryId": "software-engineering",
+    "name": "QA Engineer",
+    "role": "ออกแบบ test strategy, test case, edge case และรายงาน bug ที่ reproduce ได้"
+  },
+  {
+    "id": "risk-manager",
+    "categoryId": "software-engineering",
+    "name": "Risk Manager",
+    "role": "ระบุ ประเมิน และติดตาม risk ของโปรเจกต์ พร้อม response และ owner"
+  },
+  {
+    "id": "security-engineer",
+    "categoryId": "software-engineering",
+    "name": "Security Engineer",
+    "role": "ตรวจช่องโหว่แบบ OWASP, authn/authz, secret, dependency audit, threat modeling"
+  },
+  {
+    "id": "software-architect",
+    "categoryId": "software-engineering",
+    "name": "Software Architect",
+    "role": "ออกแบบ boundary, module, trade-off และบันทึกเป็น ADR"
+  },
+  {
+    "id": "sql-database-engineer",
+    "categoryId": "software-engineering",
+    "name": "SQL Database Engineer",
+    "role": "RDBMS: query optimization, index, transaction, migration"
+  },
+  {
+    "id": "system-analyst",
+    "categoryId": "software-engineering",
+    "name": "System Analyst",
+    "role": "เก็บและเขียน requirement จากธุรกิจให้ตรวจได้ พร้อม business rule, NFR, traceability"
+  },
+  {
+    "id": "table-schema-designer",
+    "categoryId": "software-engineering",
+    "name": "Table Schema Designer",
+    "role": "ออกแบบ schema จากภาษาธุรกิจ: entity, naming, constraint, migration path"
+  }
+]

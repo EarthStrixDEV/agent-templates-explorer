@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Agent Templates Explorer
 
-## Getting Started
+Next.js explorer for the 77 specialist agent templates in
+[EarthStrixDEV/agents](https://github.com/EarthStrixDEV/agents), across 7 categories
+(Consultant, Business, Software Engineering, Creative, Research, Life-style, Productivity).
 
-First, run the development server:
+Look & feel is based on [docs/reference/Agent Templates Explorer (standalone).html](docs/reference/Agent%20Templates%20Explorer%20%28standalone%29.html)
+— a dark-only, GitHub-dark-inspired radial graph + detail view — rebuilt as a real app with
+every agent as a real graph node (not a fake "+N more" placeholder) and a working list view.
+
+## Stack
+
+- **Next.js 16** (App Router, TypeScript, Tailwind v4, `src/`)
+- **shadcn/ui** — dark-only theme tokens matching the reference palette
+- **Framer Motion** (`motion`) — pan/zoom graph, page/view transitions
+- **React Bits**-style copy-paste components (`SpotlightCard`, `ShinyText`) in `src/components/reactbits/`
+- **react-markdown** + **remark-gfm** — renders each agent's `core.md`
+
+## Data
+
+Agent `core.md` files and README role metadata are synced from GitHub and committed as a static
+snapshot under `content/agents/` — the app never fetches GitHub at runtime.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm sync-agents
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Re-run this whenever `EarthStrixDEV/agents` changes, then commit the diff in `content/agents/`.
+Set `GITHUB_TOKEN` in `.env` (see `.env.example`) to raise GitHub API rate limits if needed.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm install
+pnpm dev      # http://localhost:3000
+pnpm build    # production build + static generation for all 77 agent pages
+pnpm lint
+```
 
-## Learn More
+## Structure
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `/` — Explorer home: search, category filter chips, Graph/List toggle (state kept in the URL)
+- `/agents/[category]/[id]` — Agent detail: persona/scope/framework/guardrail tabs, copy buttons,
+  position-in-graph mini-map, related agents
+- `scripts/sync-agents.ts` — pulls `core.md` + README role table from GitHub into `content/agents/`
+- `src/lib/agents.ts` — reads `content/agents/` at build time, parses sections/tags
+- `src/lib/graph-layout.ts` — deterministic radial layout math for the graph and mini-map
