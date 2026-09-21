@@ -1,3 +1,4 @@
+import { Map } from "lucide-react";
 import { hexToRgba, CATEGORIES } from "@/lib/categories";
 import { computeGraphLayout, VIEWBOX_W, VIEWBOX_H } from "@/lib/graph-layout";
 import type { CategoryWithAgents } from "@/lib/agents";
@@ -13,7 +14,8 @@ export function MiniMap({ categories, selectedId }: MiniMapProps) {
 
   return (
     <div className="rounded-[10px] border border-[var(--border-hairline)] bg-[var(--panel)] p-3">
-      <h3 className="mb-2 text-[12px] font-semibold uppercase tracking-[0.4px] text-[var(--label-text)]">
+      <h3 className="mb-2 flex items-center gap-1.5 text-[12px] font-semibold uppercase tracking-[0.4px] text-[var(--label-text)]">
+        <Map className="h-3.5 w-3.5" />
         Position in graph
       </h3>
       <svg viewBox={`0 0 ${VIEWBOX_W} ${VIEWBOX_H}`} className="h-[120px] w-full">

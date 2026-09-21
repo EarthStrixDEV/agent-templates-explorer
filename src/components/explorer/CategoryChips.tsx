@@ -20,7 +20,7 @@ export function CategoryChips({ categories, activeCats, onToggle }: CategoryChip
             type="button"
             onClick={() => onToggle(c.id)}
             className={cn(
-              "rounded-[16px] border px-[11px] py-[6px] text-[11.5px] font-medium transition-colors"
+              "flex items-center gap-1.5 rounded-[16px] border px-[11px] py-[6px] text-[11.5px] font-medium transition-colors"
             )}
             style={{
               borderColor: active ? c.color : "var(--border-standard)",
@@ -28,6 +28,10 @@ export function CategoryChips({ categories, activeCats, onToggle }: CategoryChip
               color: active ? c.color : "var(--label-text)",
             }}
           >
+            <span
+              className="inline-block h-1.5 w-1.5 shrink-0 rounded-full"
+              style={{ background: c.color }}
+            />
             {c.label}
           </button>
         );

@@ -1,3 +1,4 @@
+import { Tag } from "lucide-react";
 import { hexToRgba, type Category } from "@/lib/categories";
 import { CopyButton } from "./CopyButton";
 import type { Agent } from "@/lib/agents";
@@ -37,9 +38,10 @@ export function AgentHeader({ agent, category }: { agent: Agent; category: Categ
           {agent.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-[14px] px-[11px] py-[4px] text-[11.5px] text-[var(--label-text)]"
+              className="flex items-center gap-1 rounded-[14px] px-[11px] py-[4px] text-[11.5px] text-[var(--label-text)]"
               style={{ background: "var(--panel)", border: "1px solid var(--border-hairline)" }}
             >
+              <Tag className="h-3 w-3" />
               {tag}
             </span>
           ))}

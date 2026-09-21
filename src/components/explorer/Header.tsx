@@ -1,5 +1,6 @@
 "use client";
 
+import { Users, LayoutGrid } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { SearchBox } from "./SearchBox";
 import { CategoryChips } from "./CategoryChips";
@@ -47,8 +48,15 @@ export function Header({
       />
 
       <div className="ml-auto flex items-center gap-4">
-        <span className="text-[12px] text-[var(--secondary-text)]">
-          {totalAgents} agents · {totalCats} categories
+        <span className="flex items-center gap-3 text-[12px] text-[var(--secondary-text)]">
+          <span className="flex items-center gap-1">
+            <Users className="h-3.5 w-3.5" />
+            {totalAgents} agents
+          </span>
+          <span className="flex items-center gap-1">
+            <LayoutGrid className="h-3.5 w-3.5" />
+            {totalCats} categories
+          </span>
         </span>
         <ViewToggle view={view} onChange={onViewChange} />
       </div>

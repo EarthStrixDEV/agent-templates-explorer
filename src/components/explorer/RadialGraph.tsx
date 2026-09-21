@@ -138,16 +138,51 @@ export function RadialGraph({
               TEMPLATES
             </text>
 
-            {/* Agent nodes */}
-            {agents.map((a) => {
+            {/* Agent nodes — each one idles with its own float + breathing
+                rhythm so the whole graph reads as alive, not static. */}
+            {agents.map((a, i) => {
               const cat = allCategories.find((c) => c.id === a.categoryId);
               const color = cat?.color ?? "#7aa2f7";
               const dim = hasActiveFilter && !isMatch(a.id, a.categoryId);
+
+              // Deterministic pseudo-random phase/amplitude per node (seeded
+              // by index, not Math.random()) so server and client render the
+              // same initial animation state and hydration stays clean.
+              // Amplitude is kept small (<=2.5px) so the float reads as
+              // "alive" without making the node hard to click.
+              const seed = (i * 137.5) % 360;
+              const floatX = 1 + (i % 3) * 0.75;
+              const floatY = 1 + ((i * 3) % 3) * 0.75;
+              const duration = 3.2 + (i % 7) * 0.25;
+              const delay = -((seed / 360) * duration);
+
               return (
-                <g
+                <motion.g
                   key={a.id}
                   onClick={() => router.push(`/agents/${a.categoryId}/${a.id}`)}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", originX: `${a.x}px`, originY: `${a.y}px` }}
+                  initial={false}
+                  animate={
+                    dim
+                      ? { x: 0, y: 0, scale: 1 }
+                      : {
+                          x: [0, floatX, 0, -floatX, 0],
+                          y: [0, -floatY, 0, floatY, 0],
+                          scale: [1, 1.04, 1],
+                        }
+                  }
+                  transition={
+                    dim
+                      ? { duration: 0.2 }
+                      : {
+                          duration,
+                          delay,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }
+                  }
+                  whileHover={{ scale: 1.25, x: 0, y: 0, transition: { duration: 0.15 } }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <title>{a.name}</title>
                   {!dim && (
@@ -171,7 +206,7 @@ export function RadialGraph({
                   >
                     {a.short}
                   </text>
-                </g>
+                </motion.g>
               );
             })}
 
