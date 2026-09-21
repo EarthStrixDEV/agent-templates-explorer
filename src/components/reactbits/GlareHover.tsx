@@ -2,10 +2,13 @@
 
 /**
  * GlareHover — adapted from React Bits (https://reactbits.dev)
- * Diagonal glare sweep that plays on hover, done with CSS custom properties.
+ * Diagonal glare sweep that plays on hover.
+ * The sweep is driven by background-position on a full-bleed overlay so the
+ * highlight always stays inside the card bounds (translating an oversized
+ * gradient instead lets it spill outside the rounded corners).
  * Copied into the codebase per React Bits' copy-paste distribution model.
  */
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type GlareHoverProps = {
@@ -14,7 +17,6 @@ type GlareHoverProps = {
   glareColor?: string;
   glareOpacity?: number;
   glareAngle?: number;
-  glareSize?: number;
   transitionDuration?: number;
 };
 
@@ -24,29 +26,25 @@ export function GlareHover({
   glareColor = "#ffffff",
   glareOpacity = 0.12,
   glareAngle = -45,
-  glareSize = 250,
   transitionDuration = 650,
 }: GlareHoverProps) {
+  const [hovered, setHovered] = useState(false);
+
   return (
     <div
-      className={cn("group/glare relative overflow-hidden", className)}
-      style={
-        {
-          "--gh-angle": `${glareAngle}deg`,
-          "--gh-size": `${glareSize}%`,
-          "--gh-duration": `${transitionDuration}ms`,
-        } as React.CSSProperties
-      }
+      className={cn("relative overflow-hidden", className)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       {children}
       <div
-        className="pointer-events-none absolute inset-0 -translate-x-full transition-transform group-hover/glare:translate-x-full"
+        className="pointer-events-none absolute inset-0"
         style={{
-          background: `linear-gradient(var(--gh-angle), transparent 40%, ${glareColor} 50%, transparent 60%)`,
-          opacity: glareOpacity,
-          backgroundSize: "var(--gh-size) var(--gh-size)",
-          transitionDuration: "var(--gh-duration)",
-          transitionTimingFunction: "ease",
+          background: `linear-gradient(${glareAngle}deg, transparent 35%, ${glareColor} 50%, transparent 65%)`,
+          backgroundSize: "250% 250%",
+          backgroundPosition: hovered ? "0% 0%" : "100% 100%",
+          opacity: hovered ? glareOpacity : 0,
+          transition: `background-position ${transitionDuration}ms ease, opacity ${transitionDuration / 2}ms ease`,
         }}
       />
     </div>

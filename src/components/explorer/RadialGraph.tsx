@@ -167,7 +167,15 @@ export function RadialGraph({
                 <motion.g
                   key={a.id}
                   onClick={() => router.push(`/agents/${a.categoryId}/${a.id}`)}
-                  style={{ cursor: "pointer", originX: `${a.x}px`, originY: `${a.y}px` }}
+                  // transform-box: fill-box makes transform-origin resolve
+                  // against this group's own bounding box, so scaling grows
+                  // the node in place instead of flinging it away from the
+                  // SVG's 0,0 origin.
+                  style={{
+                    cursor: "pointer",
+                    transformBox: "fill-box",
+                    transformOrigin: "center",
+                  }}
                   initial={false}
                   animate={
                     dim
