@@ -7,6 +7,9 @@
 Browse personas, expertise scopes, reasoning frameworks and guardrails —
 as a living constellation or a searchable grid.
 
+### [▶ Open the live demo](https://agent-templates-explorer.vercel.app)
+
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)](https://agent-templates-explorer.vercel.app)
 [![Next.js](https://img.shields.io/badge/Next.js-16.3-000000?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org)
 [![React](https://img.shields.io/badge/React-19.2-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
@@ -163,6 +166,18 @@ pnpm dev          # → http://localhost:3000
 > **Note on the layout math** — node positions are rounded to a fixed precision so the server and
 > client serialise identical SVG attributes. Without it, floating-point drift in the last digit
 > trips a React hydration mismatch.
+
+---
+
+## ☁️ Deployment
+
+Live at **[agent-templates-explorer.vercel.app](https://agent-templates-explorer.vercel.app)**,
+hosted on Vercel and linked to this repository — every push to `master` ships automatically.
+
+No environment variables are required at runtime: agent content is baked into the build, so the
+deployed site is fully static.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/EarthStrixDEV/agent-templates-explorer)
 
 ---
 
