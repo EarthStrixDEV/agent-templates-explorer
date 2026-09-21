@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { AgentCard } from "./AgentCard";
+import { VariableProximity } from "@/components/reactbits/VariableProximity";
 import type { CategoryWithAgents } from "@/lib/agents";
 
 type AgentGridProps = {
@@ -34,11 +35,12 @@ export function AgentGrid({ categories, isMatch, hasActiveFilter }: AgentGridPro
       {visibleCategories.map((cat) => (
         <section key={cat.id}>
           <div className="mb-4 flex items-baseline gap-2">
-            <h2
-              className="text-[12px] font-bold uppercase tracking-[0.4px]"
-              style={{ color: cat.color }}
-            >
-              {cat.label}
+            <h2 style={{ color: cat.color }}>
+              <VariableProximity
+                text={cat.label.toUpperCase()}
+                className="text-[12px] font-bold tracking-[0.4px]"
+                radius={70}
+              />
             </h2>
             <span className="text-[11px] text-[var(--secondary-text)]">
               {cat.agents.length} agents

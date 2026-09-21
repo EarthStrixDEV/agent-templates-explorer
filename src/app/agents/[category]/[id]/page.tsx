@@ -5,6 +5,7 @@ import { AgentHeader } from "@/components/agent/AgentHeader";
 import { CoreMdTabs } from "@/components/agent/CoreMdTabs";
 import { MiniMap } from "@/components/agent/MiniMap";
 import { RelatedAgents } from "@/components/agent/RelatedAgents";
+import { DecryptedText } from "@/components/reactbits/DecryptedText";
 import { getAgent, getAllAgents, getCategoriesWithAgents, getRelatedAgents } from "@/lib/agents";
 import { getCategory } from "@/lib/categories";
 
@@ -51,7 +52,8 @@ export default async function AgentDetailPage({
           Back to graph
         </Link>
         <span className="text-[12px] text-[var(--faint-label)]">
-          Agent Templates / {cat.label} / {agent.id}
+          Agent Templates / {cat.label} /{" "}
+          <DecryptedText text={agent.id} animateOn="view" speed={25} />
         </span>
       </div>
 

@@ -4,6 +4,10 @@ import { useState, type WheelEvent } from "react";
 import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { ClickSpark } from "@/components/reactbits/ClickSpark";
+import { Magnet } from "@/components/reactbits/Magnet";
+import { Noise } from "@/components/reactbits/Noise";
+import { Crosshair } from "@/components/reactbits/Crosshair";
 import { Legend } from "./Legend";
 import { hexToRgba, type Category } from "@/lib/categories";
 import {
@@ -47,7 +51,10 @@ export function RadialGraph({
   }
 
   return (
-    <div className="relative flex-1 overflow-hidden" style={{ minHeight: 560 }}>
+    <Crosshair color="#7aa2f7" className="relative flex-1 overflow-hidden" >
+    <div className="absolute inset-0" style={{ minHeight: 560 }}>
+      <Noise opacity={0.02} />
+      <ClickSpark sparkColor="#7aa2f7" sparkCount={10} className="absolute inset-0">
       <motion.div
         drag
         dragMomentum={false}
@@ -236,29 +243,37 @@ export function RadialGraph({
           </svg>
         </motion.div>
       </motion.div>
+      </ClickSpark>
 
       <Legend categories={allCategories} />
 
-      <div className="absolute bottom-6 right-6 flex flex-col gap-1 rounded-[9px] border border-[var(--border-hairline)] bg-[var(--surface)] p-1">
-        <Button
-          type="button"
-          size="icon"
-          variant="ghost"
-          className="h-7 w-7"
-          onClick={() => setZoom((z) => Math.min(2.5, z + 0.2))}
-        >
-          <Plus className="h-3.5 w-3.5" />
-        </Button>
-        <Button
-          type="button"
-          size="icon"
-          variant="ghost"
-          className="h-7 w-7"
-          onClick={() => setZoom((z) => Math.max(0.5, z - 0.2))}
-        >
-          <Minus className="h-3.5 w-3.5" />
-        </Button>
-      </div>
+      <Magnet
+        padding={40}
+        magnetStrength={5}
+        className="absolute bottom-6 right-6"
+      >
+        <div className="flex flex-col gap-1 rounded-[9px] border border-[var(--border-hairline)] bg-[var(--surface)] p-1">
+          <Button
+            type="button"
+            size="icon"
+            variant="ghost"
+            className="h-7 w-7"
+            onClick={() => setZoom((z) => Math.min(2.5, z + 0.2))}
+          >
+            <Plus className="h-3.5 w-3.5" />
+          </Button>
+          <Button
+            type="button"
+            size="icon"
+            variant="ghost"
+            className="h-7 w-7"
+            onClick={() => setZoom((z) => Math.max(0.5, z - 0.2))}
+          >
+            <Minus className="h-3.5 w-3.5" />
+          </Button>
+        </div>
+      </Magnet>
     </div>
+    </Crosshair>
   );
 }
