@@ -1,47 +1,173 @@
-# Agent Templates Explorer
+<div align="center">
 
-Next.js explorer for the 77 specialist agent templates in
-[EarthStrixDEV/agents](https://github.com/EarthStrixDEV/agents), across 7 categories
-(Consultant, Business, Software Engineering, Creative, Research, Life-style, Productivity).
+# 🕸️ Agent Templates Explorer
 
-Look & feel is based on [docs/reference/Agent Templates Explorer (standalone).html](docs/reference/Agent%20Templates%20Explorer%20%28standalone%29.html)
-— a dark-only, GitHub-dark-inspired radial graph + detail view — rebuilt as a real app with
-every agent as a real graph node (not a fake "+N more" placeholder) and a working list view.
+**An interactive radial-graph explorer for 77 specialist AI agent templates.**
 
-## Stack
+Browse personas, expertise scopes, reasoning frameworks and guardrails —
+as a living constellation or a searchable grid.
 
-- **Next.js 16** (App Router, TypeScript, Tailwind v4, `src/`)
-- **shadcn/ui** — dark-only theme tokens matching the reference palette
-- **Framer Motion** (`motion`) — pan/zoom graph, page/view transitions
-- **React Bits**-style copy-paste components (`SpotlightCard`, `ShinyText`) in `src/components/reactbits/`
+[![Next.js](https://img.shields.io/badge/Next.js-16.3-000000?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19.2-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Motion](https://img.shields.io/badge/Motion-13-FF5C5C?style=flat-square)](https://motion.dev)
+[![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-black?style=flat-square)](https://ui.shadcn.com)
+
+</div>
+
+---
+
+## ✨ What it does
+
+Every agent in [`EarthStrixDEV/agents`](https://github.com/EarthStrixDEV/agents) becomes a node you
+can explore. The graph lays all **77 agents** across **7 categories** on concentric rings around a
+central hub — no fake "+N more" placeholders, every agent is really there.
+
+| | |
+|---|---|
+| 🌌 **Graph view** | Radial constellation with drag-to-pan, wheel zoom, and nodes that idle with their own float + breathing rhythm |
+| 🗂️ **List view** | Category-grouped card grid with 3D tilt, cursor spotlight and glare sweep on hover |
+| 🔍 **Live filtering** | Search across names, roles and tags; filter by category. Non-matches dim rather than disappear, so the shape of the whole library stays visible |
+| 📄 **Agent detail** | `core.md` split into Persona / Scope / Framework / Guardrail tabs, plus the raw source |
+| 🧭 **Mini-map** | Shows exactly where the current agent sits in the wider graph |
+| 🔗 **Shareable state** | Search, filters and view mode all live in the URL |
+| 📋 **One-click copy** | Grab the full `core.md` or just its repo path |
+
+---
+
+## 🎨 Design
+
+Dark-only, built on a GitHub-dark-inspired palette with a per-category accent ramp:
+
+| Category | Accent | | Category | Accent |
+|---|---|---|---|---|
+| Consultant | `#f2994a` 🟠 | | Research | `#a78bfa` 🟣 |
+| Business | `#5b8def` 🔵 | | Life-style | `#f6c945` 🟡 |
+| Software Engineering | `#2ecc71` 🟢 | | Productivity | `#4dd0e1` 🩵 |
+| Creative | `#eb5da0` 🩷 | | | |
+
+Typography is **Inter** for UI and **JetBrains Mono** for paths and raw markdown.
+
+### Motion & micro-interactions
+
+Twenty [React Bits](https://reactbits.dev)-style components are vendored into
+`src/components/reactbits/` (copy-paste, no runtime dependency on the library) and wired across
+every screen:
+
+<table>
+<tr><td>
+
+**Text**
+`ShinyText` · `GradientText`
+`BlurText` · `RotatingText`
+`DecryptedText` · `TrueFocus`
+`CountUp` · `VariableProximity`
+
+</td><td>
+
+**Surfaces**
+`SpotlightCard` · `TiltedCard`
+`GlareHover` · `MagicBento`
+`StarBorder` · `ElectricBorder`
+`PixelShimmer`
+
+</td><td>
+
+**Scene**
+`ClickSpark` · `Crosshair`
+`Magnet` · `Noise`
+`AnimatedList` · `FadeContent`
+
+</td></tr>
+</table>
+
+All of them run on Framer Motion, canvas or plain CSS — nothing pulls in GSAP.
+
+---
+
+## 🧱 Stack
+
+- **[Next.js 16](https://nextjs.org)** — App Router, React 19, Turbopack, fully static output
+- **TypeScript 5** + **Tailwind CSS 4**
+- **[shadcn/ui](https://ui.shadcn.com)** — theme tokens overridden to a dark-only palette
+- **[Motion](https://motion.dev)** — graph pan/zoom, node idle loops, view transitions
 - **react-markdown** + **remark-gfm** — renders each agent's `core.md`
+- **lucide-react** — iconography
 
-## Data
+---
 
-Agent `core.md` files and README role metadata are synced from GitHub and committed as a static
-snapshot under `content/agents/` — the app never fetches GitHub at runtime.
+## 📦 Data pipeline
 
-```bash
-pnpm sync-agents
+Agent content is a **committed static snapshot**, not a runtime fetch — the whole site builds to
+static HTML and never calls GitHub in production.
+
+```
+EarthStrixDEV/agents  ──(pnpm sync-agents)──▶  content/agents/**/core.md
+                                               content/agents/index.json
+                                                        │
+                                              src/lib/agents.ts (build time)
+                                                        │
+                                                 77 static pages
 ```
 
-Re-run this whenever `EarthStrixDEV/agents` changes, then commit the diff in `content/agents/`.
-Set `GITHUB_TOKEN` in `.env` (see `.env.example`) to raise GitHub API rate limits if needed.
+```bash
+pnpm sync-agents   # pull the latest core.md files + README role table
+```
 
-## Development
+Re-run it whenever the upstream repo changes, then commit the diff under `content/agents/`.
+Set `GITHUB_TOKEN` in `.env` (see [`.env.example`](.env.example)) if you hit API rate limits.
+
+---
+
+## 🚀 Getting started
 
 ```bash
 pnpm install
-pnpm dev      # http://localhost:3000
-pnpm build    # production build + static generation for all 77 agent pages
-pnpm lint
+pnpm dev          # → http://localhost:3000
 ```
 
-## Structure
+| Script | What it does |
+|---|---|
+| `pnpm dev` | Dev server with HMR |
+| `pnpm build` | Production build + static generation for all 77 agent pages |
+| `pnpm start` | Serve the production build |
+| `pnpm lint` | ESLint |
+| `pnpm sync-agents` | Re-sync agent content from GitHub |
 
-- `/` — Explorer home: search, category filter chips, Graph/List toggle (state kept in the URL)
-- `/agents/[category]/[id]` — Agent detail: persona/scope/framework/guardrail tabs, copy buttons,
-  position-in-graph mini-map, related agents
-- `scripts/sync-agents.ts` — pulls `core.md` + README role table from GitHub into `content/agents/`
-- `src/lib/agents.ts` — reads `content/agents/` at build time, parses sections/tags
-- `src/lib/graph-layout.ts` — deterministic radial layout math for the graph and mini-map
+---
+
+## 🗺️ Project structure
+
+```
+├── content/agents/              # committed snapshot: 77 × core.md + index.json
+├── docs/reference/              # original standalone HTML the design is based on
+├── scripts/
+│   └── sync-agents.ts           # GitHub → content/agents/ sync
+└── src/
+    ├── app/
+    │   ├── page.tsx             # explorer (graph + list)
+    │   └── agents/[category]/[id]/
+    │       └── page.tsx         # agent detail (SSG, 77 pages)
+    ├── components/
+    │   ├── explorer/            # header, search, chips, graph, cards
+    │   ├── agent/               # detail header, tabs, mini-map, related
+    │   ├── reactbits/           # 20 vendored motion components
+    │   └── ui/                  # shadcn primitives
+    └── lib/
+        ├── agents.ts            # reads content/ at build time, parses sections
+        ├── categories.ts        # the 7 categories + colour helpers
+        └── graph-layout.ts      # deterministic radial layout math
+```
+
+> **Note on the layout math** — node positions are rounded to a fixed precision so the server and
+> client serialise identical SVG attributes. Without it, floating-point drift in the last digit
+> trips a React hydration mismatch.
+
+---
+
+## 🙏 Credits
+
+- Agent templates — [EarthStrixDEV/agents](https://github.com/EarthStrixDEV/agents)
+- Motion components — [React Bits](https://reactbits.dev) by [@davidhaz](https://github.com/DavidHDev)
+- UI primitives — [shadcn/ui](https://ui.shadcn.com)
