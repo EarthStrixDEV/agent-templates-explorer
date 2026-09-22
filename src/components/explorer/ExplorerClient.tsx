@@ -55,6 +55,13 @@ export function ExplorerClient({ categories, totalAgents }: ExplorerClientProps)
 
   const handleViewChange = useCallback((v: ExplorerView) => setParam("view", v), [setParam]);
 
+  /** Drop search + category filters but keep the current view. */
+  const handleClearFilters = useCallback(() => {
+    const params = new URLSearchParams();
+    if (view) params.set("view", view);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  }, [pathname, router, view]);
+
   const isMatch = useCallback(
     (agentId: string, categoryId: string) => {
       const catMatch = activeCats.length === 0 || activeCats.includes(categoryId);
@@ -71,6 +78,26 @@ export function ExplorerClient({ categories, totalAgents }: ExplorerClientProps)
 
   const hasActiveFilter = search.length > 0 || activeCats.length > 0;
 
+  const matchingAgents = useMemo(
+    () =>
+      categories.reduce(
+        (sum, cat) =>
+          sum + cat.agents.filter((a) => isMatch(a.id, cat.id)).length,
+        0
+      ),
+    [categories, isMatch]
+  );
+
+  /**
+   * Carries the current explorer state (view + filters) into agent links so
+   * the detail page's back button can restore exactly where the user was.
+   */
+  const returnTo = useMemo(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    const qs = params.toString();
+    return qs ? `/?${qs}` : "/";
+  }, [searchParams]);
+
   return (
     <div className="flex h-screen flex-col">
       <Header
@@ -79,10 +106,13 @@ export function ExplorerClient({ categories, totalAgents }: ExplorerClientProps)
         onSearchChange={handleSearchChange}
         activeCats={activeCats}
         onToggleCategory={handleToggleCategory}
+        onClearFilters={handleClearFilters}
         view={view}
         onViewChange={handleViewChange}
         totalAgents={totalAgents}
         totalCats={CATEGORIES.length}
+        matchingAgents={matchingAgents}
+        hasActiveFilter={hasActiveFilter}
       />
 
       <AnimatePresence mode="wait">
@@ -100,6 +130,9 @@ export function ExplorerClient({ categories, totalAgents }: ExplorerClientProps)
               allCategories={CATEGORIES}
               isMatch={isMatch}
               hasActiveFilter={hasActiveFilter}
+              matchingAgents={matchingAgents}
+              returnTo={returnTo}
+              onClearFilters={handleClearFilters}
             />
           </motion.div>
         ) : (
@@ -115,6 +148,8 @@ export function ExplorerClient({ categories, totalAgents }: ExplorerClientProps)
               categories={categories}
               isMatch={isMatch}
               hasActiveFilter={hasActiveFilter}
+              returnTo={returnTo}
+              onClearFilters={handleClearFilters}
             />
           </motion.div>
         )}

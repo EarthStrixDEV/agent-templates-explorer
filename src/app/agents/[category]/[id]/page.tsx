@@ -1,7 +1,8 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
 import { AgentHeader } from "@/components/agent/AgentHeader";
+import { BackLink } from "@/components/agent/BackLink";
 import { CoreMdTabs } from "@/components/agent/CoreMdTabs";
 import { MiniMap } from "@/components/agent/MiniMap";
 import { RelatedAgents } from "@/components/agent/RelatedAgents";
@@ -44,15 +45,26 @@ export default async function AgentDetailPage({
   return (
     <div className="flex h-screen flex-col">
       <div className="flex items-center gap-3 border-b border-[var(--border-hairline)] px-7 py-4">
-        <Link
-          href="/?view=graph"
-          className="flex items-center gap-1.5 text-[12.5px] text-[var(--secondary-text)] transition-colors hover:text-[var(--primary-text)]"
+        <Suspense
+          fallback={<span className="text-[12.5px] text-[var(--secondary-text)]">Back</span>}
         >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          Back to graph
-        </Link>
+          <BackLink />
+        </Suspense>
         <span className="text-[12px] text-[var(--faint-label)]">
-          Agent Templates / {cat.label} /{" "}
+          <Link
+            href="/?view=list"
+            className="transition-colors hover:text-[var(--primary-text)]"
+          >
+            Agent Templates
+          </Link>
+          {" / "}
+          <Link
+            href={`/?view=list&cat=${cat.id}`}
+            className="transition-colors hover:text-[var(--primary-text)]"
+          >
+            {cat.label}
+          </Link>
+          {" / "}
           <DecryptedText text={agent.id} animateOn="view" speed={25} />
         </span>
       </div>
@@ -66,7 +78,9 @@ export default async function AgentDetailPage({
 
           <div className="space-y-4">
             <MiniMap categories={categories} selectedId={agent.id} />
-            <RelatedAgents agents={related} />
+            <Suspense fallback={null}>
+              <RelatedAgents agents={related} />
+            </Suspense>
           </div>
         </div>
       </div>

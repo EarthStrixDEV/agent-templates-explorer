@@ -18,6 +18,7 @@ type CrosshairProps = {
 export function Crosshair({ children, color = "#7aa2f7", className }: CrosshairProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [overInteractive, setOverInteractive] = useState(false);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springConfig = { damping: 25, stiffness: 300 };
@@ -29,19 +30,27 @@ export function Crosshair({ children, color = "#7aa2f7", className }: CrosshairP
     if (!rect) return;
     x.set(e.clientX - rect.left);
     y.set(e.clientY - rect.top);
+
+    // Yield to real affordances: over anything clickable, hand the pointer
+    // back so the user still gets the usual "this is a target" cue.
+    const target = e.target as Element | null;
+    setOverInteractive(Boolean(target?.closest?.('a, button, [role="button"], g[style*="pointer"]')));
   }
 
   return (
     <div
       ref={containerRef}
       className={className}
-      style={{ position: "relative", cursor: "none" }}
+      style={{ position: "relative", cursor: overInteractive ? "pointer" : "none" }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setVisible(true)}
-      onMouseLeave={() => setVisible(false)}
+      onMouseLeave={() => {
+        setVisible(false);
+        setOverInteractive(false);
+      }}
     >
       {children}
-      {visible && (
+      {visible && !overInteractive && (
         <>
           <motion.div
             className="pointer-events-none absolute top-0 left-0 z-50"

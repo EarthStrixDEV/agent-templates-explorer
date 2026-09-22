@@ -137,18 +137,64 @@ export function getCategoriesWithAgents(): CategoryWithAgents[] {
   }));
 }
 
-/** Related agents: same category first, then one from a different category. */
-export function getRelatedAgents(agent: Agent, count = 3): Agent[] {
-  const all = loadAgents();
-  const sameCategory = all.filter(
-    (a) => a.categoryId === agent.categoryId && a.id !== agent.id
-  );
-  const related = sameCategory.slice(0, count);
-  if (related.length < count) {
-    const others = all.filter(
-      (a) => a.categoryId !== agent.categoryId && !related.includes(a)
-    );
-    related.push(...others.slice(0, count - related.length));
+/**
+ * Words too generic to signal that two agents are actually related.
+ * Without this, boilerplate like "และ" or "design" matches almost everything.
+ */
+const STOPWORDS = new Set([
+  "และ", "หรือ", "ที่", "การ", "ของ", "ให้", "เป็น", "ไม่", "ใน", "กับ", "จาก",
+  "ระดับ", "แบบ", "ด้วย", "ตาม", "เพื่อ", "ต้อง", "มี", "ทำ", "ได้",
+  "and", "or", "the", "for", "with", "from", "into", "per", "via",
+]);
+
+/** Split a blob of text into comparable keyword tokens. */
+function keywords(text: string): string[] {
+  return text
+    .toLowerCase()
+    .split(/[^\p{L}\p{N}]+/u)
+    .filter((w) => w.length > 2 && !STOPWORDS.has(w));
+}
+
+/**
+ * Vocabulary that characterises an agent: its explicit tags plus the
+ * meaningful words in its name and role.
+ *
+ * Tags alone are too sparse to rank with — they're derived by slicing the
+ * role string, so most agents end up with phrases nobody else shares.
+ */
+function agentVocabulary(agent: Agent): Set<string> {
+  return new Set([
+    ...agent.tags.flatMap(keywords),
+    ...keywords(agent.name),
+    ...keywords(agent.role),
+  ]);
+}
+
+/**
+ * Score how related another agent is to `agent`: shared vocabulary dominates,
+ * with a small bonus for sharing a category, so agents that genuinely overlap
+ * in subject matter rank above arbitrary same-category neighbours.
+ */
+function relatednessScore(own: Set<string>, agent: Agent, other: Agent): number {
+  const otherVocab = agentVocabulary(other);
+  let shared = 0;
+  for (const word of otherVocab) {
+    if (own.has(word)) shared += 1;
   }
-  return related;
+  const sameCategory = other.categoryId === agent.categoryId ? 1 : 0;
+  return shared * 10 + sameCategory;
+}
+
+/** Related agents, ranked by shared vocabulary then by shared category. */
+export function getRelatedAgents(agent: Agent, count = 3): Agent[] {
+  const own = agentVocabulary(agent);
+  return loadAgents()
+    .filter((a) => a.id !== agent.id)
+    .map((a) => ({ agent: a, score: relatednessScore(own, agent, a) }))
+    .filter((entry) => entry.score > 0)
+    .sort(
+      (a, b) => b.score - a.score || a.agent.name.localeCompare(b.agent.name)
+    )
+    .slice(0, count)
+    .map((entry) => entry.agent);
 }

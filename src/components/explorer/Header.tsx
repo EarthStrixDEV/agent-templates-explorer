@@ -1,6 +1,6 @@
 "use client";
 
-import { Users, LayoutGrid } from "lucide-react";
+import { Users, LayoutGrid, FilterX } from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { ShinyText } from "@/components/reactbits/ShinyText";
 import { CountUp } from "@/components/reactbits/CountUp";
@@ -23,10 +23,13 @@ type HeaderProps = {
   onSearchChange: (v: string) => void;
   activeCats: string[];
   onToggleCategory: (id: string) => void;
+  onClearFilters: () => void;
   view: ExplorerView;
   onViewChange: (v: ExplorerView) => void;
   totalAgents: number;
   totalCats: number;
+  matchingAgents: number;
+  hasActiveFilter: boolean;
 };
 
 export function Header({
@@ -35,10 +38,13 @@ export function Header({
   onSearchChange,
   activeCats,
   onToggleCategory,
+  onClearFilters,
   view,
   onViewChange,
   totalAgents,
   totalCats,
+  matchingAgents,
+  hasActiveFilter,
 }: HeaderProps) {
   return (
     <header className="flex flex-wrap items-center gap-4 border-b border-[var(--border-hairline)] px-6 py-3.5">
@@ -65,11 +71,34 @@ export function Header({
         onToggle={onToggleCategory}
       />
 
+      {hasActiveFilter && (
+        <button
+          type="button"
+          onClick={onClearFilters}
+          className="flex items-center gap-1.5 rounded-[16px] border border-[var(--border-standard)] px-[11px] py-[6px] text-[11.5px] font-medium text-[var(--secondary-text)] transition-colors hover:border-[var(--muted-stroke)] hover:text-[var(--primary-text)]"
+        >
+          <FilterX className="h-3.5 w-3.5" />
+          Clear filters
+        </button>
+      )}
+
       <div className="ml-auto flex items-center gap-4">
         <span className="flex items-center gap-3 text-[12px] text-[var(--secondary-text)]">
           <span className="flex items-center gap-1">
             <Users className="h-3.5 w-3.5" />
-            <CountUp to={totalAgents} duration={1.4} /> agents
+            {hasActiveFilter ? (
+              <span
+                className={
+                  matchingAgents === 0 ? "text-[var(--link)]" : undefined
+                }
+              >
+                {matchingAgents} of {totalAgents} agents
+              </span>
+            ) : (
+              <>
+                <CountUp to={totalAgents} duration={1.4} /> agents
+              </>
+            )}
           </span>
           <span className="flex items-center gap-1">
             <LayoutGrid className="h-3.5 w-3.5" />

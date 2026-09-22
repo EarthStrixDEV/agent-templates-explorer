@@ -1,10 +1,22 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Users2, ChevronRight } from "lucide-react";
 import { getCategory } from "@/lib/categories";
 import { AnimatedList } from "@/components/reactbits/AnimatedList";
 import type { Agent } from "@/lib/agents";
 
 export function RelatedAgents({ agents }: { agents: Agent[] }) {
+  const searchParams = useSearchParams();
+  // Carry the origin explorer state forward so the next agent's back link
+  // still points at wherever the user started.
+  const from = searchParams.get("from");
+  const suffix =
+    from && from.startsWith("/") && !from.startsWith("//")
+      ? `?from=${encodeURIComponent(from)}`
+      : "";
+
   if (agents.length === 0) return null;
 
   return (
@@ -19,7 +31,7 @@ export function RelatedAgents({ agents }: { agents: Agent[] }) {
           return (
             <Link
               key={a.id}
-              href={`/agents/${a.categoryId}/${a.id}`}
+              href={`/agents/${a.categoryId}/${a.id}${suffix}`}
               className="group flex items-center gap-2 rounded-[9px] px-2 py-1.5 text-[12.5px] text-[var(--body-text)] transition-colors hover:bg-[var(--surface)]"
             >
               <span

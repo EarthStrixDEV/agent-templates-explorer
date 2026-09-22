@@ -65,13 +65,13 @@ export function AgentHeader({ agent, category }: { agent: Agent; category: Categ
             <CopyButton
               text={agent.raw}
               label="Copy core.md"
-              toastMessage="คัดลอก core.md แล้วค่ะ"
+              toastMessage="Copied core.md"
               variant="default"
               className="border-0 bg-transparent font-bold hover:bg-transparent hover:opacity-90"
               style={{ color: category.color }}
             />
           </StarBorder>
-          <CopyButton text={filePath} label="Copy path" toastMessage="คัดลอก path แล้วค่ะ" />
+          <CopyButton text={filePath} label="Copy path" toastMessage="Copied file path" />
         </div>
       </div>
     </FadeContent>

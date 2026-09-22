@@ -32,7 +32,7 @@ export function CopyButton({
       toast.success(toastMessage);
       setTimeout(() => setCopied(false), 1500);
     } catch {
-      toast.error("คัดลอกไม่สำเร็จ กรุณาลองใหม่");
+      toast.error("Could not copy — please try again");
     }
   }
 

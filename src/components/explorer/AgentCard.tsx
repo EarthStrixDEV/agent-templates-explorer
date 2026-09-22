@@ -12,6 +12,8 @@ type AgentCardProps = {
   agent: Agent;
   color: string;
   dimmed?: boolean;
+  /** Explorer URL (view + filters) to hand the detail page for its back link. */
+  returnTo?: string;
 };
 
 function initials(name: string): string {
@@ -20,9 +22,13 @@ function initials(name: string): string {
   return letters.slice(0, 3) || name.slice(0, 2).toUpperCase();
 }
 
-export function AgentCard({ agent, color, dimmed }: AgentCardProps) {
+export function AgentCard({ agent, color, dimmed, returnTo }: AgentCardProps) {
+  const href = returnTo
+    ? `/agents/${agent.categoryId}/${agent.id}?from=${encodeURIComponent(returnTo)}`
+    : `/agents/${agent.categoryId}/${agent.id}`;
+
   return (
-    <Link href={`/agents/${agent.categoryId}/${agent.id}`} className="block">
+    <Link href={href} className="block">
       <TiltedCard maxTilt={5} scaleOnHover={1.015}>
         <GlareHover className="rounded-[9px]" glareOpacity={0.1}>
           <SpotlightCard
