@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Tag } from "lucide-react";
 import { hexToRgba, type Category } from "@/lib/categories";
 import { GradientText } from "@/components/reactbits/GradientText";
@@ -5,6 +6,7 @@ import { BlurText } from "@/components/reactbits/BlurText";
 import { StarBorder } from "@/components/reactbits/StarBorder";
 import { FadeContent } from "@/components/reactbits/FadeContent";
 import { CopyButton } from "./CopyButton";
+import { UseTemplateButton } from "./UseTemplateButton";
 import type { Agent } from "@/lib/agents";
 
 function initials(name: string): string {
@@ -62,15 +64,21 @@ export function AgentHeader({ agent, category }: { agent: Agent; category: Categ
 
         <div className="flex flex-wrap items-center gap-2">
           <StarBorder color={category.color} speed="4s">
-            <CopyButton
-              text={agent.raw}
-              label="Copy core.md"
-              toastMessage="Copied core.md"
-              variant="default"
-              className="border-0 bg-transparent font-bold hover:bg-transparent hover:opacity-90"
-              style={{ color: category.color }}
-            />
+            <Suspense
+              fallback={
+                <span className="px-3 py-2 text-[12.5px] font-bold text-[var(--secondary-text)]">
+                  Use template
+                </span>
+              }
+            >
+              <UseTemplateButton agent={agent} color={category.color} />
+            </Suspense>
           </StarBorder>
+          <CopyButton
+            text={agent.raw}
+            label="Copy core.md"
+            toastMessage="Copied core.md"
+          />
           <CopyButton text={filePath} label="Copy path" toastMessage="Copied file path" />
         </div>
       </div>

@@ -64,15 +64,27 @@ button restores the exact view and filters the user came from.
 
 ### Static generation is load-bearing
 
-All 77 detail pages are prerendered via `generateStaticParams`. **Adding
-`searchParams` to `src/app/agents/[category]/[id]/page.tsx` silently opts the
+Both agent routes — `[id]` and `[id]/use` — prerender all 77 pages via
+`generateStaticParams`. **Adding `searchParams` to either page silently opts the
 whole route into dynamic rendering.** Anything that needs query params there must
-read them client-side instead — see `src/components/agent/BackLink.tsx` and
-`RelatedAgents.tsx`, which both use `useSearchParams` inside `<Suspense>` for
-exactly this reason.
+read them client-side instead — see `BackLink`, `RelatedAgents`,
+`UseTemplateButton` and `UseTemplateBackLink`, which all use `useSearchParams`
+inside `<Suspense>` for exactly this reason.
 
-After changing that route, check the build output says `● (SSG) … [+74 more
-paths]` and not `ƒ (Dynamic)`.
+After changing those routes, check the build output says `● (SSG) … [+74 more
+paths]` for each and not `ƒ (Dynamic)`. A full build should report 158 static
+pages.
+
+### Platform export
+
+`/agents/[category]/[id]/use` reformats an agent's `core.md` for ChatGPT, Claude,
+Gemini, xAI and a generic fallback. `src/lib/platforms.ts` owns this: each
+platform declares its manual setup steps plus a `build(agent)` that returns the
+copyable fields, so adding a platform is one entry in `PLATFORMS`.
+
+The shared `instructionBody` helper reassembles the parsed sections back into one
+prompt with their headings restored, since most platforms take a single
+free-text box. It falls back to `agent.raw` if no sections parsed.
 
 ### Graph layout is deterministic by necessity
 
